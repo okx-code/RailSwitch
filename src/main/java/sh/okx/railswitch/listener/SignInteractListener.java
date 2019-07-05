@@ -29,12 +29,14 @@ public class SignInteractListener implements Listener {
             Player player = e.getPlayer();
             String dest = line.substring(6);
 
-            trySetDest(player, dest);
+            if(!dest.isEmpty())
+              trySetDest(player, dest);
           } else if(i < 3 && line.toLowerCase().endsWith("/dest")) {
             Player player = e.getPlayer();
             String dest = s.getLine(i + 1);
 
-            trySetDest(player, dest);
+            if(!dest.isEmpty())
+              trySetDest(player, dest);
           }
         }
       }
