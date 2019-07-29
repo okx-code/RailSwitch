@@ -28,13 +28,9 @@ public class SetDestinationCommand implements CommandExecutor {
     }
 
     String dest = args[0];
-    if (!plugin.isValidDestination(dest)) {
-      player.sendMessage(ChatColor.RED + "Destinations can not be more than 40 characters and may only use alphanumerical characters and ASCII symbols.");
-      return true;
-    }
 
-    plugin.getDatabase().setPlayerDestination(player, dest);
-    player.sendMessage(ChatColor.GREEN + "Set your rail destination to: " + dest);
+    plugin.setDestination(player, dest);
+
     return true;
   }
 }
