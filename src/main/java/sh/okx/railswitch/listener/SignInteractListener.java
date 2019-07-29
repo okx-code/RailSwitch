@@ -30,27 +30,16 @@ public class SignInteractListener implements Listener {
             String dest = line.substring(6);
 
             if(!dest.isEmpty())
-              trySetDest(player, dest);
+              plugin.setDestination(player, dest);
           } else if(i < 3 && line.toLowerCase().endsWith("/dest")) {
             Player player = e.getPlayer();
             String dest = s.getLine(i + 1);
 
             if(!dest.isEmpty())
-              trySetDest(player, dest);
+              plugin.setDestination(player, dest);
           }
         }
       }
     }
-  }
-
-  public void trySetDest(Player player, String dest) {
-    if (!plugin.isValidDestination(dest)) {
-      player.sendMessage(ChatColor.RED + "Destinations can not be more than 40 characters and may only use alphanumerical characters and ASCII symbols.");
-      return;
-    }
-
-    plugin.getDatabase().setPlayerDestination(player, dest);
-    player.sendMessage(ChatColor.GREEN + "Set your rail destination to: " + dest);
-    return;
   }
 }

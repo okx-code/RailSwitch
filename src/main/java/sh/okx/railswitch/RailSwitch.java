@@ -1,7 +1,9 @@
 package sh.okx.railswitch;
 
 import com.google.common.base.CharMatcher;
+import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.entity.Player;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import sh.okx.railswitch.database.ConnectionPool;
@@ -67,6 +69,17 @@ public class RailSwitch extends JavaPlugin {
         .or(CharMatcher.inRange('a', 'z'))
         .or(CharMatcher.inRange('A', 'Z'))
         .or(CharMatcher.anyOf("!\"#$%&'()*+,-./;:<=>?@[]\\^_`{|}~")).matchesAllOf(message);
+  }
+
+  public boolean setDestination(Player player, String dest) {
+    if (!isValidDestination(dest)) {
+      player.sendMessage(ChatColor.RED + "Destinations can not be more than 40 characters and may only use alphanumerical characters and ASCII symbols.");
+      return true;
+    }
+
+    getDatabase().setPlayerDestination(player, dest);
+    player.sendMessage(ChatColor.GREEN + "Set your rail destination to: " + dest);
+    return false;
   }
 
   public boolean isTimings() {
